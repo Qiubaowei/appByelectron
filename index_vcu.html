@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<link href="style.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="content">
+	<div class="header">
+		<div class="logo"></div>
+		<div class="logo-title">全车固件更新</div>
+	</div>
+	<div class="set">
+		<div class="set-title">串口设置</div>
+		<div class="set-form">
+			<label class="control-label">串口</label>
+			<select class="form-control" style="width: 220px" id="port">
+				<!-- <option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option> -->
+			</select>
+		</div>
+		<div class="set-form">
+			<label class="control-label">波特率</label>
+			<select class="form-control" style="width:120px" id="baudrate">
+				<option>9600</option>
+				<option>19200</option>
+				<option>38400</option>
+				<option>57600</option>
+				<option>115200</option>
+				<option>1152000</option>
+			</select>
+		</div>
+		<div class="form-button">
+			<button class="btn btn-blue" id="connect">连接</button>
+			<button class="btn btn-gary" id="disconnect">断开</button>
+		</div>
+	</div>
+	<div class="set">
+		<div class="set-title">扫码枪设置</div>
+		<div class="set-form">
+			<label class="control-label">串口</label>
+			<select class="form-control" style="width: 220px" id="portScan">
+				<!-- <option>1</option>
+				<option>2</option>
+				<option>3</option>
+				<option>4</option>
+				<option>5</option> -->
+			</select>
+		</div>
+		<div class="set-form">
+			<label class="control-label">波特率</label>
+			<select class="form-control" style="width:120px" id="baudratescan">
+				<option>9600</option>
+			</select>
+		</div>
+		<div class="form-button">
+			<button class="btn btn-blue" id="connectScan">连接</button>
+			<button class="btn btn-gary" id="disconnectScan">断开</button>
+		</div>
+	</div>
+	<div class=" clearfix"></div>
+	<div  class="table-content">
+		<div class="file-box2">
+			<label class="control-label">选择固件文件</label>
+			<form action="" method="post" enctype="multipart/form-data">
+				<input type='text' name='textfield' id='textfield' class='form-control file-text' />
+				<input type='button' class='btn btn-blue file-btn' value='浏览...' />
+				<input type="file" name="fileField" class="file" id="fileField" size="28" onchange="document.getElementById('textfield').value=this.value;
+				document.getElementById('firmwareName').innerHTML= this.files[0]?this.files[0].name:'';
+				document.getElementById('firmwareSize').innerHTML= this.files[0]?(parseInt(this.files[0].size/1024) + 'k'):'';
+				document.getElementById('firmwareVer').innerHTML= this.files[0]?'v1.0':'';" />
+			</form>
+		</div>
+		<div class="file-box2">
+			<label class="control-label">选择音乐文件</label>
+			<form action="" method="post" enctype="multipart/form-data">
+				<input type='text' name='textfield' id='textfield2' class='form-control file-text' />
+				<input type='button' class='btn btn-blue file-btn' value='浏览...' />
+				<input type="file" name="fileField" class="file" id="fileField2" size="28" onchange="document.getElementById('textfield2').value=this.value;
+				document.getElementById('musicName').innerHTML= this.files[0]?this.files[0].name:'';
+				document.getElementById('musicSize').innerHTML= this.files[0]?(parseInt(this.files[0].size/1024) + 'k'):'';
+				document.getElementById('musicVer').innerHTML= this.files[0]?'v1.0':'';" />
+			</form>
+		</div>
+		<table class="table">
+			<tr class="title">
+				<td>
+				<td>文件名称</td>
+				<td>文件大小</td>
+				<td>文件版本</td>
+			</tr>
+			<tr>
+				<td>固件文件</td>
+				<td id="firmwareName"></td>
+				<td id="firmwareSize"></td>
+				<td id="firmwareVer"></td>
+			</tr>
+			<tr>
+				<td>音乐文件</td>
+				<td id="musicName"></td>
+				<td id="musicSize"></td>
+				<td id="musicVer"></td>
+			</tr>
+		</table>
+	</div>
+	<div class="start-content">
+		<div class="start-button">
+			<button class="btn btn-blue start-btn" id="update">开始烧写固件</button>
+		</div>
+	</div>
+    <!--<div class="file-box2">-->
+        <!--<div class="start-content">-->
+            <!--<div class="start-button">-->
+                <!--<button class="btn btn-blue start-btn" id="update">开始烧写固件</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!--<div class="file-box2">-->
+        <!--<div class="start-content">-->
+            <!--<div class="start-button">-->
+                <!--<button class="btn btn-blue start-btn" id="update_rmf">开始下载音乐</button>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+	<div class=" clearfix"></div>
+	<div class="testing-tip" id="press">
+		<h3>过程详情</h3>
+		<div class="testing-tip-50">
+			<ol>
+				<li>下载固件<span class="greey-color span1" id="progress_bin">0%</span></li>
+				<li>下载音乐<span class="greey-color span1" id="progress_rmf">0%</span></li>
+				<li>测试电压<span class="greey-color span1" id="voltage">测试</span></li>
+				<li>测试电流<span class="greey-color span1" id="electricity">测试</span></li>
+				<li>测试CAN<span class="greey-color span1" id="can">测试</span></li>
+				<li>测试485<span class="greey-color span1" id="four85">测试</span></li>
+				<li>测试数据蓝牙<span class="greey-color span1" id="dataBluetooth">测试</span></li>
+				<li>测试音频蓝牙<span class="greey-color span1" id="musicBluetooth">测试</span></li>
+			</ol>
+		</div>
+		<div class="testing-tip-50">
+			<ol start="9">
+				<li>语音播放测试<span class="greey-color span1" id="voice">测试</span></li>
+				<li>测试IO输入<span class="greey-color span1" id="input">测试</span></li>
+				<li>测试OUT输出
+					<ol>
+						<li>灯测试<span class="greey-color span1" id="light">测试</span></li>
+						<li>呼吸测试<span class="greey-color span1" id="breathe">测试</span></li>
+					</ol>
+				</li>
+				<li>防盗器测试
+					<ol>
+						<li>解锁键
+							<span class="span2">
+								<label>
+									<input type="radio" name="RadioGroup1" value="正常" id="RadioGroup1_0">
+									正常
+								</label>
+								<label>
+									<input type="radio" name="RadioGroup1" value="错误" id="RadioGroup1_1">
+									错误
+								</label>
+							</span>
+						</li>
+						<li>锁定键
+							<span class="span2">
+								<label>
+									<input type="radio" name="RadioGroup2" value="正常" id="RadioGroup2_0">
+									正常
+								</label>
+								<label>
+									<input type="radio" name="RadioGroup2" value="错误" id="RadioGroup2_1">
+									错误
+								</label>
+							</span>
+						</li>
+					</ol>
+				</li>
+			</ol>
+		</div>
+	</div>
+</div>
+<script src="../nodejs692/iap_js/iap_main_vcu.js" ></script>
+</body>
+</html>
